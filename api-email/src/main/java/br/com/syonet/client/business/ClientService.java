@@ -6,6 +6,7 @@ import javax.ws.rs.BadRequestException;
 
 import br.com.syonet.client.model.Client;
 import br.com.syonet.client.repository.ClientRepository;
+
 @ApplicationScoped
 public class ClientService {
 	

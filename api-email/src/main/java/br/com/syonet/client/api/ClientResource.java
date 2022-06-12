@@ -22,12 +22,12 @@ public class ClientResource {
 	@Inject
 	ClientService service;
 
-//	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response list() {
-//		var client = this.service.getAllClient();
-//		return Response.ok(client).build();
-//	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response list() {
+		var client = this.service.getAllClient();
+		return Response.ok(client).build();
+	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
