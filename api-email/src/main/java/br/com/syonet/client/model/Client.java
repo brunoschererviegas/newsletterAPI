@@ -11,7 +11,7 @@ import javax.persistence.Transient;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = Client.FIND_ALL, query = "SELECT t FROM Client t"),
-		@NamedQuery(name = Client.FIND_ONE, query = "SELECT t FROM Client t WHERE t.id = .id") })
+		@NamedQuery(name = Client.FIND_ONE, query = "SELECT t FROM Client t WHERE t.id = id") })
 
 public class Client {
 	@Transient
