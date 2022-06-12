@@ -6,6 +6,7 @@ import java.util.Objects;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import br.com.syonet.newsletter.model.Newsletter;
 import br.com.syonet.newsletter.repository.NewsletterRepository;
@@ -22,9 +23,9 @@ public class NewsletterPostgresJPA implements NewsletterRepository {
 				.getResultList();
 		
 	}
-
-
+	
 	@Override
+	@Transactional
 	public Newsletter save(Newsletter newsletter) {
 		if(Objects.nonNull(newsletter.getId())) {
 			this.em.merge(newsletter);
