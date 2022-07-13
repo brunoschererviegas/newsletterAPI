@@ -1,27 +1,19 @@
 package br.com.syonet.client.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Transient;
+
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = Client.FIND_ALL, query = "SELECT t FROM Client t"),
-		@NamedQuery(name = Client.FIND_ONE, query = "SELECT t FROM Client t WHERE t.id = id") })
-
-public class Client {
-	@Transient
-	public static final String FIND_ONE = "Client.findOne";
-	@Transient
-	public static final String FIND_ALL = "Client.findAll";
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+public class Client extends PanacheEntity{
+//@NamedQueries({ @NamedQuery(name = Client.FIND_ALL, query = "SELECT t FROM Client t"),
+//		@NamedQuery(name = Client.FIND_ONE, query = "SELECT t FROM Client t WHERE t.id = id") })
 
 	@Column
 	private String nome;
@@ -32,6 +24,7 @@ public class Client {
 	@Column
 	private long dt_nascimento;
 
+	
 	public String getNome() {
 		return nome;
 	}
@@ -56,10 +49,14 @@ public class Client {
 		this.dt_nascimento = dt_nascimento;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
+//	public static List<Client> findNotCompleted(){
+//		return list ("completed",false);
+//	}
+//	
+//	public static List<Client> findCompleted(){
+//		return list ("completed",true);
+//	}
+	
 	public String toString() {
 		return "\nId :" + this.id + "\nNome :" + this.nome + "\nEmail :" 
 	+ this.email + "\nData Nascimento :" + this.dt_nascimento;

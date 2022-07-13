@@ -4,6 +4,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
 
+import com.arjuna.ats.internal.jdbc.drivers.modifiers.list;
+
 import br.com.syonet.newsletter.model.Newsletter;
 import br.com.syonet.newsletter.repository.NewsletterRepository;
 
@@ -31,4 +33,5 @@ public class NewsletterService {
 	public Object getAllNewsletter() {
 		return this.repository.list();
 	}
+	
 }

@@ -18,9 +18,9 @@ public class Email {
 
 	public static void main(String[] args) throws AddressException, MessagingException {
 
-		String email = "brunosv777@hotmail.com";
-		String emailPassword = "Vibra2020#";
-		String emailHost = "smtp-mail.outlook.com";
+		String email = "brunoschererviegas@gmail.com";
+		String emailPassword = "xjlctmzdamrzbztj";
+		String emailHost = "smtp.gmail.com";
 		Integer smptPort = 587;
 
 		Properties prop = new Properties();
@@ -56,6 +56,7 @@ public class Email {
 		message.setContent(multipart);
 		
 		Transport.send(message);
+		
 		
 	}
 

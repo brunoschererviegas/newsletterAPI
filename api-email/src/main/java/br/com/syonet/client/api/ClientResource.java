@@ -14,6 +14,7 @@ import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
 import br.com.syonet.client.business.ClientService;
 import br.com.syonet.client.model.Client;
+import br.com.syonet.newsletter.business.TesteNews;
 
 @Path(ClientResource.PATH)
 public class ClientResource {
@@ -34,6 +35,9 @@ public class ClientResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response create(@RequestBody(description = "New client for create") Client client) {
 		Client createdClient = this.service.create(client);
+		TesteNews news = new TesteNews();
+		news.main(null);
+		
 		return Response.status(Status.CREATED).entity(createdClient).build();
 	}
 

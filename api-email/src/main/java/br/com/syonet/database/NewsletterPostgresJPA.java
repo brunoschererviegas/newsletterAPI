@@ -17,17 +17,18 @@ public class NewsletterPostgresJPA implements NewsletterRepository {
 	@Inject
 	EntityManager em;
 	
+	Newsletter newsletter = new Newsletter();
+	
 	@Override
 	public List<Newsletter> list(){
-		return this.em.createNamedQuery(Newsletter.FIND_ALL, Newsletter.class)
-				.getResultList();
-		
+//		return Newsletter.findAll();
+		return null;
 	}
 	
 	@Override
 	@Transactional
 	public Newsletter save(Newsletter newsletter) {
-		if(Objects.nonNull(newsletter.getId())) {
+		if(Objects.nonNull(newsletter.id)) {
 			this.em.merge(newsletter);
 		}
 		this.em.persist(newsletter);
@@ -36,8 +37,6 @@ public class NewsletterPostgresJPA implements NewsletterRepository {
 
 	@Override
 	public Newsletter findById(Long id) {
-		return em.createNamedQuery(Newsletter.FIND_ONE,Newsletter.class)
-				.setParameter("id", id)
-				.getSingleResult();
+		return Newsletter.findById(id);
 	}
 }

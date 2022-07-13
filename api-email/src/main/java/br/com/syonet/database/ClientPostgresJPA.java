@@ -13,19 +13,21 @@ import br.com.syonet.client.repository.ClientRepository;
 
 @ApplicationScoped
 public class ClientPostgresJPA implements ClientRepository{
+	
 	@Inject
 	EntityManager em;
 	
+	Client client = new Client();
+	
 	@Override
 	public List<Client> list(){
-		return this.em.createNamedQuery(Client.FIND_ALL, Client.class)
-				.getResultList();
+		return (List<Client>) Client.findAll();
 	}
 
 	@Override
 	@Transactional
 	public Client save(Client client) {
-		if (Objects.nonNull(client.getId())) {
+		if (Objects.nonNull(client.id)) {
 			this.em.merge(client);
 		}
 		this.em.persist(client);
@@ -34,8 +36,6 @@ public class ClientPostgresJPA implements ClientRepository{
 
 	@Override
 	public Client findById(Long id) {
-		return em.createNamedQuery(Client.FIND_ONE,Client.class)
-				.setParameter("id", id)
-				.getSingleResult();
+		return findById(id);
 	}
 }
