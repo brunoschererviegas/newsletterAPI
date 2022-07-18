@@ -2,9 +2,9 @@ package br.com.syonet.newsletter.api;
 
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.OPTIONS;
@@ -18,7 +18,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.com.syonet.newsletter.business.NewsletterService;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
+
 import br.com.syonet.newsletter.business.TesteNews;
 import br.com.syonet.newsletter.model.Newsletter;
 import io.quarkus.panache.common.Sort;
@@ -27,8 +28,7 @@ import io.quarkus.panache.common.Sort;
 public class NewsletterResource {
 	public static final String PATH = "/newsletter";
 
-	@Inject
-	NewsletterService service;
+	
 
 	@OPTIONS
 	public Response opt() {
@@ -37,66 +37,59 @@ public class NewsletterResource {
 
 	@GET
 	public List<Newsletter> getAtll() {
-		var newsletter = this.service.getAllNewsletter();
+		var newsletter = Newsletter.listAll();
 		TesteNews news = new TesteNews();
-		news.main(null);
+		news.writerInfoInConsole();
 		return Newsletter.listAll(Sort.by("title"));
 	}
 
 	@GET
 	@Path("/{id}")
 	public Newsletter getOne(@PathParam("id") Long id) {
-		Newsletter entity = Newsletter.findById(id);
-		if (entity == null) {
+		Newsletter news = Newsletter.findById(id);
+		if (news == null) {
 			throw new WebApplicationException("Newsletter with ID of " + id + "does not exist.",Status.NOT_FOUND);
 		}
-		return entity;
+		return news;
 	}
 
-//	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response list() {
-//		var newsletter = this.service.getAllNewsletter();
-//		TesteNews news = new TesteNews();
-//		news.main(null);
-//		return Response.ok(newsletter).build();
-//	}
-
-//	@POST
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response create(@RequestBody(description = "New newslleter for create") Newsletter newsletter) {
-//		Newsletter createdNewsletter = this.service.create(newsletter);
-//		return Response.status(Status.CREATED).entity(createdNewsletter).build();
-//	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response list() {
+		var newsletter = Newsletter.findAll();
+		
+		return Response.ok(newsletter).build();
+	}
 
 	@POST
 	@Transactional
-	public Response create(@Valid Newsletter news) {
-		news.persist();
-		return Response.status(Status.CREATED).entity(news).build();
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response create(@RequestBody(description = "New newslleter for create")@Valid Newsletter newsletter) {
+		newsletter.persist();
+		return Response.status(Status.CREATED).entity(newsletter).build();
 	}
+	
 
 	@PATCH
 	@Path("/{id}")
 	@Transactional
 	public Response update(@Valid Newsletter news, @PathParam("id") Long id) {
-		Newsletter entity = Newsletter.findById(id);
-		entity.id = id;
-		entity.setTitle(news.getTitle());
-		entity.setLink(news.getLink());
-		return Response.ok(entity).build();
+		Newsletter newsUpdate = Newsletter.findById(id);
+		news.setTitle(newsUpdate.getTitle());
+		news.setLink(newsUpdate.getLink());
+		return Response.ok(news).build();
 	}
 	
 	@DELETE
     @Transactional
     @Path("/{id}")
     public Response deleteOne(@PathParam("id") Long id) {
-        Newsletter entity = Newsletter.findById(id);
-        if (entity == null) {
+        Newsletter news = Newsletter.findById(id);
+        if (news == null) {
             throw new WebApplicationException("Newsletter with id of " + id + " does not exist.", Status.NOT_FOUND);
         }
-        entity.delete();
+        news.delete();
         return Response.noContent().build();
     }
 	

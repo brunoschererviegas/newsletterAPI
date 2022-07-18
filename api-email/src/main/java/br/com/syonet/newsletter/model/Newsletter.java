@@ -5,21 +5,18 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 @Entity
-public class Newsletter extends PanacheEntity{
-
-//	@Transient
-//	public static final String FIND_ONE = "Newsletter.findOne";
-//	@Transient
-//	public static final String FIND_ALL = "Newsletter.findAll";
+public class Newsletter extends PanacheEntity {
 
 	@Column
 	String title;
+	
+	@Column
+	Boolean processada;
 
 	@Column
 	String description;
@@ -27,10 +24,19 @@ public class Newsletter extends PanacheEntity{
 	@Column
 	String link;
 
+	public Boolean getProcessada() {
+		return processada;
+	}
+
+	public void setProcessada(Boolean processada) {
+		this.processada = processada;
+	}
+
 	public String getTitle() {
 		return title;
 	}
 
+	
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -51,18 +57,17 @@ public class Newsletter extends PanacheEntity{
 		this.link = link;
 	}
 
+	public static List<Newsletter> findNotCompleted() {
+		return list("p", true);
+	}
 
-//	public static List<Newsletter> findNotCompleted() {
-//		return list("completed", false);
-//	}
-//
-//	public static List<Newsletter> findCompleted() {
-//		return list("completed", true);
-//	}
-//
-//	public static long deleteCompleted() {
-//		return delete("deleted", true);
-//	}
+	public static List<Newsletter> findNotProcessada() {
+		return list("processada", false);
+	}
+
+	public static long deleteCompleted() {
+		return delete("deleted", true);
+	}
 
 	public String toString() {
 		return "\nId :" + this.id + "\nTitle :" + this.title + "\nDescription :" + this.description + "\nLink :"

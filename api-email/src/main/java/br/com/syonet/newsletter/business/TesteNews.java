@@ -7,15 +7,20 @@ import br.com.syonet.newsletter.model.Newsletter;
 
 public class TesteNews {
 
-	public static void main(String[] args) {
+	public void writerInfoInConsole() {
 
 		Newsletter news = new Newsletter();
-		List<Newsletter> listNews = (List<Newsletter>) news.findAll();
+		List<Newsletter> listNews = news.findNotProcessada();
 
 		Client client = new Client();
-		List<Client> listClient = (List<Client>) client.findAll();
+		List<Client> listClient = client.listAll();
+		System.out.println("Lista de noticias");
 		System.out.println(listNews);
+//		for (Newsletter news : listNews) {
+//			
+//		}
 
+		System.out.println("Lista de clientes");
 		System.out.println(listClient);
 
 	}
