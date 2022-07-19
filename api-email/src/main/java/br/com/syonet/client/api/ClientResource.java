@@ -41,8 +41,6 @@ public class ClientResource {
 		if (client.id == null) {
 			throw new WebApplicationException("Newsletter with ID of " + id + "does not exist.",Status.NOT_FOUND);
 		}
-		
-		Send
 		return client;
 	}
 

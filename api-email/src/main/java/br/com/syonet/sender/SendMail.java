@@ -10,30 +10,33 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import br.com.syonet.client.model.Client;
+import br.com.syonet.newsletter.model.Newsletter;
+
 public class SendMail {
 
-	public static void main(String[] args) {
+	
+	
+	@Override
+	public String toString() {
+		
+		return "SendMail [toString()=" + super.toString() + "]";
+	}
 
-		// Recipient's email ID needs to be mentioned.
+	public static void sender() {
+
+		
 		String to = "brunosv1995@gmail.com";
-
-		// Sender's email ID needs to be mentioned
-		String from = "brunosv1995@gmail.com";
-
-		// Assuming you are sending email from through gmails smtp
 		String host = "smtp.gmail.com";
 
-		// Get system properties
 		Properties prop = System.getProperties();
 
-		// Setup mail server
 		prop.put("mail.smtp.auth", true);
 		prop.put("mail.smtp.starttls.enable", "true");
 		prop.put("mail.smtp.host", host);
 		prop.put("mail.smtp.port", 587);
 		prop.put("mail.smtp.ssl.trust", host);
 
-		// Get the Session object.// and pass username and password
 		Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
 
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -44,33 +47,36 @@ public class SendMail {
 
 		});
 
-		// Used to debug SMTP issues
 		session.setDebug(true);
-
 		try {
-			// Create a default MimeMessage object.
+
 			MimeMessage message = new MimeMessage(session);
-
-			// Set From: header field of the header.
 			message.setFrom(new InternetAddress(from));
-
-			// Set To: header field of the header.
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-			// Set Subject: header field
-			message.setSubject("This is the Subject Line!");
-
-			// Now set the actual message
-			message.setText("This is actual message");
+			message.setSubject(subject);
+			message.setText(text);
 
 			System.out.println("sending...");
-			// Send message
+
 			Transport.send(message);
 			System.out.println("Sent message successfully....");
 		} catch (MessagingException mex) {
 			mex.printStackTrace();
 		}
-
 	}
-
+	
+	public static void setFrom(String from) {
+		SendMail.from = from;
+	}
+	
+	public static void setSubject(String subject) {
+		SendMail.subject = subject;
+	}
+	
+	public static void setText(String text) {
+		SendMail.text = text;
+	}
+	static String from;
+	static String subject;
+	static String text;
 }

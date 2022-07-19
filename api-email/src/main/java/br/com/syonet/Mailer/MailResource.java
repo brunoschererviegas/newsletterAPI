@@ -1,29 +1,25 @@
 package br.com.syonet.Mailer;
 
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
-import br.com.syonet.newsletter.business.Email;
-import io.quarkus.mailer.Mail;
-import io.quarkus.mailer.Mailer;
-import io.smallrye.common.annotation.Blocking;
+import br.com.syonet.sender.SendMail;
 
 @Path("/mail")
 public class MailResource {
 
-	@Inject
-	Mailer mailer;
-
-//    Mail mail = new Mail();
-
-	Email email = new Email();
-	String[] dados = email.dados();
-
+	SendMail sendMail = new SendMail();
+	
 	@GET
-	public void sendEmail() {
-		System.out.println("=======" + "ENVIA O E-MAIL" + "==============");
-		mailer.send(Mail.withText(dados[0], dados[1], dados[2]));
+	@Path("/config")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String config() {
+		
+		//Vou implementar para pegar a configuração de um arquivo
+		//Será possivel alterar a conta se acessar diretamente o arquivo
+		
+		return null; 
 	}
-
 }

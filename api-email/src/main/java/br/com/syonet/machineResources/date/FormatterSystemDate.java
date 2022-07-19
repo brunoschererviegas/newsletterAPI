@@ -8,8 +8,10 @@ import br.com.syonet.client.model.Client;
 
 public class FormatterSystemDate {
 	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM");
+	
+	
 	public Date dateOfBirthDay(Client client) throws ParseException {
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/mmmm");
+		
 		Date dayOfBrithDay = formatter.parse(String.valueOf(client.getDt_nascimento()));
 
 		return dayOfBrithDay;
