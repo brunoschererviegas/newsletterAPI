@@ -18,8 +18,9 @@ public class Email {
 
 	public static void main(String[] args) throws AddressException, MessagingException {
 
-		String email = "brunoschererviegas@gmail.com";
-		String emailPassword = "xjlctmzdamrzbztj";
+
+		String email = "brunosv1995@gmail.com";
+		String emailPassword = "pcpuqlmzhtoehaso";
 		String emailHost = "smtp.gmail.com";
 		Integer smptPort = 587;
 

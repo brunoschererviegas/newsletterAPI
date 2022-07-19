@@ -8,7 +8,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.MimeMessage;
 
-public class testeGuizinho3 {
+public class testeDosGuri2 {
 	
 	final String username = "brunoschererviegas@gmail.com";
 	final String password = "xjlctmzdamrzbztj";
@@ -18,7 +18,7 @@ public class testeGuizinho3 {
 	
 	
 
-	public testeGuizinho3(String recebedor,String title, String body) {
+	public testeDosGuri2(String recebedor,String title, String body) {
 		this.title = title;
 		this.body = body;
 		this.recipient = recebedor;
@@ -53,8 +53,8 @@ public class testeGuizinho3 {
 
 	}
 	public static void main(String[] args) {
-		testeGuizinho3 teste;
-		teste = new testeGuizinho3("brunosv1995@gmail.com","teste",":)");
+		testeDosGuri2 teste;
+		teste = new testeDosGuri2("brunosv1995@gmail.com","teste",":)");
 	}
 }
 

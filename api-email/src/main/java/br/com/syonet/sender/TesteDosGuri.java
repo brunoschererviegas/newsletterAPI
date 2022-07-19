@@ -1,3 +1,4 @@
+package br.com.syonet.sender;
 //package br.com.syonet.sender;
 //
 //import java.util.Properties;

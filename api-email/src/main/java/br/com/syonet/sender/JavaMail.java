@@ -32,9 +32,9 @@ public class JavaMail {
 	        
 
 	        
-	        String myAccountEmail = "brunoschererviegas@gmail.com";
+	        String myAccountEmail = "brunosv1995@gmail.com";
 
-	        String password = "xjlctmzdamrzbztj";
+	        String password = "pcpuqlmzhtoehaso";
 
 	        
 	        Session session = Session.getInstance(properties, new Authenticator() {
