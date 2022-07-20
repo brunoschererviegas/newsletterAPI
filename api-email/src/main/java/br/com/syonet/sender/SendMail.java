@@ -23,7 +23,7 @@ public class SendMail {
 		return "SendMail [toString()=" + super.toString() + "]";
 	}
 
-	public static void sender() {
+	public static void main(String[] args) {
 
 		
 		String to = "brunosv1995@gmail.com";
@@ -52,14 +52,14 @@ public class SendMail {
 
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(from));
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(from));
 			message.setSubject(subject);
 			message.setText(text);
 
 			System.out.println("sending...");
 
 			Transport.send(message);
-			System.out.println("Sent message successfully....");
+			System.out.println("Sent message successfully to: " + from);
 		} catch (MessagingException mex) {
 			mex.printStackTrace();
 		}
@@ -76,7 +76,7 @@ public class SendMail {
 	public static void setText(String text) {
 		SendMail.text = text;
 	}
-	static String from;
-	static String subject;
-	static String text;
+	static String from = "augusto.drehmer@syonet.com";
+	static String subject = "E-mail Sended with JavaMail";
+	static String text = "Teste de envio de email da API !";
 }
