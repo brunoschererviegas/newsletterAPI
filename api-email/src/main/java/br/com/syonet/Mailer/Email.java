@@ -26,6 +26,25 @@ public class Email {
 
 	public Email(List<Newsletter> listNews, List<Client> listClient) throws ParseException {
 
+		sendMail(listNews, listClient);
+
+	}
+
+	public void writeInConsole(List<Newsletter> listNews, List<Client> listClient) {
+
+		for (Client client : listClient) {
+			SendMail sendMail = new SendMail();
+			
+				message = "Bom dia " + client.getNome() + "\n Segue as notícias de hoje";
+			
+			for (Newsletter news : listNews) {
+				System.out.println(newsOfDay = news.getTitle() + "\n" + news.getDescription() + "\n" + news.getLink());
+
+			}
+		}
+	}
+
+	public void sendMail(List<Newsletter> listNews, List<Client> listClient) throws ParseException {
 		for (Client client : listClient) {
 			SendMail sendMail = new SendMail();
 			if (date.dateOfBirthDay(client) == date.dayAndMounth()) {
@@ -39,12 +58,12 @@ public class Email {
 			for (Newsletter news : listNews) {
 				System.out.println(newsOfDay = news.getTitle() + "\n" + news.getDescription() + "\n" + news.getLink());
 
-				SendMail.setSubject(subject);
-				SendMail.setText(message + newsOfDay);
-				SendMail.setFrom(client.getEmail());
+				sendMail.setSubject(subject);
+				sendMail.setText(message + newsOfDay);
+				sendMail.setFrom(client.getEmail());
+				sendMail.main();
 			}
 		}
-
 	}
 
 }

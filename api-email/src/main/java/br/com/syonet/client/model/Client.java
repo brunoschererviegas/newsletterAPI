@@ -1,21 +1,22 @@
 package br.com.syonet.client.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 @Entity
 public class Client extends PanacheEntity{
 	@Column
-	private String nome;
+	String nome;
 
 	@Column
-	private String email;
+	String email;
 
 	@Column
-	private Long dt_nascimento;
+	Long dt_nascimento;
 
 	
 	public String getNome() {
@@ -41,6 +42,9 @@ public class Client extends PanacheEntity{
 	public void setDt_nascimento(Long dt_nascimento) {
 		this.dt_nascimento = dt_nascimento;
 	}
+	public static List<Client> All(){
+		return list("active", true);
+}
 	
 	public String toString() {
 		return "\nId :" + this.id + "\nNome :" + this.nome + "\nEmail :" 

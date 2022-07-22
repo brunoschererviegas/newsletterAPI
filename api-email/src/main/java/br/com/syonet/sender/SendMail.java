@@ -23,7 +23,7 @@ public class SendMail {
 		return "SendMail [toString()=" + super.toString() + "]";
 	}
 
-	public static void main(String[] args) {
+	public void main() {
 
 		
 		String to = "brunosv1995@gmail.com";
@@ -65,18 +65,18 @@ public class SendMail {
 		}
 	}
 	
-	public static void setFrom(String from) {
+	public void setFrom(String from) {
 		SendMail.from = from;
 	}
 	
-	public static void setSubject(String subject) {
+	public void setSubject(String subject) {
 		SendMail.subject = subject;
 	}
 	
-	public static void setText(String text) {
+	public void setText(String text) {
 		SendMail.text = text;
 	}
-	static String from = "augusto.drehmer@syonet.com";
+	static String from = "bruno.viegas@syonet.com";
 	static String subject = "E-mail Sended with JavaMail";
 	static String text = "Teste de envio de email da API !";
 }
