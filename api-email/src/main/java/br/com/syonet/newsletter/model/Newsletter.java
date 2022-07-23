@@ -55,12 +55,9 @@ public class Newsletter extends PanacheEntity {
 		this.link = link;
 	}
 
-	public static List<Newsletter> findNotCompleted() {
-		return list("p", true);
-	}
 
 	public static List<Newsletter> findNotProcessada() {
-		return list("processada", false);
+		return list("processada", true);
 	}
 
 	public static long deleteCompleted() {

@@ -15,8 +15,8 @@ public class Email {
 
 	String message;
 
-	String messageBithday = "Nossa equipe lhe deseja um Feliz Aniversário, e para neste dia tão especial"
-			+ "também é importante se manter informado";
+	String messageBithday = " Nossa equipe lhe deseja um Feliz Aniversário, e neste dia tão especial "
+			+ "também é importante se manter informado!!";
 
 	String messageGoodBye = "Até a próxima";
 
@@ -47,7 +47,9 @@ public class Email {
 	public void sendMail(List<Newsletter> listNews, List<Client> listClient) throws ParseException {
 		for (Client client : listClient) {
 			SendMail sendMail = new SendMail();
-			if (date.dateOfBirthDay(client) == date.dayAndMounth()) {
+			if (date.dateOfBirthDay(client).getDay() == date.dayAndMounth().getDay()
+					&& date.dateOfBirthDay(client).getMonth() == date.dateOfBirthDay(client).getMonth()) {
+				System.out.println(date.dateOfBirthDay(client) == date.dayAndMounth());
 
 				message = "Bom dia " + client.getNome() + messageBithday + "\n Segue as notícias de hoje";
 

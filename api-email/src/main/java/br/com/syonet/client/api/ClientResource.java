@@ -30,7 +30,7 @@ public class ClientResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response list() {
-		var client = Client.findAll();
+		var client = Client.All();
 		return Response.ok(client).build();
 	}
 	

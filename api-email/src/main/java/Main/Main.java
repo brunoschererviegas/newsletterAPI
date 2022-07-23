@@ -2,7 +2,6 @@ package Main;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 
@@ -14,7 +13,7 @@ import io.quarkus.scheduler.ScheduledExecution;
 
 @ApplicationScoped
 public class Main {
-	@Scheduled(cron = "10 26 1 * * ? ")
+	@Scheduled(cron = "0 06 21 * * ? ")
 	void execute(ScheduledExecution execution) {
 
 
@@ -40,14 +39,14 @@ public class Main {
 		Email email;
 		try {
 			email = new Email(listNews, listClient);
-			email.writeInConsole(listNews, listClient);
+//			email.writeInConsole(listNews, listClient);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	// Realizado com Thread
+//	 Realizado com Thread
 //	public static void main(String[] args) {
 //		
 //	MeThread teste = new MeThread("Teste");

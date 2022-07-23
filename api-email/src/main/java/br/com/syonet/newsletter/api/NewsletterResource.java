@@ -36,11 +36,10 @@ public class NewsletterResource {
 	}
 
 	@GET
-	public List<Newsletter> getAtll() {
-		var newsletter = Newsletter.listAll();
-		TesteNews news = new TesteNews();
-		news.writerInfoInConsole();
-		return Newsletter.listAll(Sort.by("title"));
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAtll() {
+		var newsletter = Newsletter.findNotProcessada();
+		return Response.ok(newsletter).build();
 	}
 
 	@GET
@@ -52,15 +51,6 @@ public class NewsletterResource {
 		}
 		return news;
 	}
-
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response list() {
-		var newsletter = Newsletter.findAll();
-		
-		return Response.ok(newsletter).build();
-	}
-
 	@POST
 	@Transactional
 	@Consumes(MediaType.APPLICATION_JSON)
