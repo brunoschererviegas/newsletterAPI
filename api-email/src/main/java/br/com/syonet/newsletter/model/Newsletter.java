@@ -1,32 +1,20 @@
 package br.com.syonet.newsletter.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Transient;
 
-import br.com.syonet.client.model.Client;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = Newsletter.FIND_ALL, query = "SELECT t FROM Newsletter t"),
-		@NamedQuery(name = Newsletter.FIND_ONE, query = "SELECT t FROM Newsletter t WHERE t.id = id") })
-
-public class Newsletter {
-
-	@Transient
-	public static final String FIND_ONE = "Newsletter.findOne";
-	@Transient
-	public static final String FIND_ALL = "Newsletter.findAll";
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
+public class Newsletter extends PanacheEntity {
 
 	@Column
 	String title;
+	
+	@Column
+	Boolean processada;
 
 	@Column
 	String description;
@@ -34,14 +22,19 @@ public class Newsletter {
 	@Column
 	String link;
 
-	public Long getId() {
-		return id;
+	public Boolean getProcessada() {
+		return processada;
+	}
+
+	public void setProcessada(Boolean processada) {
+		this.processada = processada;
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
+	
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -60,6 +53,11 @@ public class Newsletter {
 
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+
+	public static List<Newsletter> findNotProcessada() {
+		return list("processada", false);
 	}
 
 	public String toString() {

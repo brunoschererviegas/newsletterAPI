@@ -1,6 +1,10 @@
 package br.com.syonet.newsletter.repository;
 
-import br.com.syonet.newsletter.model.Newsletter;
-import br.com.syonet.database.CrudRepository;
+import javax.enterprise.context.ApplicationScoped;
 
-public interface NewsletterRepository extends CrudRepository<Newsletter>{}
+import br.com.syonet.newsletter.model.Newsletter;
+import io.quarkus.hibernate.orm.panache.PanacheRepository;
+@ApplicationScoped
+public class NewsletterRepository implements PanacheRepository<Newsletter>{
+
+}
