@@ -10,7 +10,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 @Entity
 public class Client extends PanacheEntity{
 	@Column
-	String nome;
+	String name;
 
 	@Column
 	String email;
@@ -18,13 +18,23 @@ public class Client extends PanacheEntity{
 	@Column
 	Long dt_nascimento;
 
+	@Column
+	Boolean active;
 	
-	public String getNome() {
-		return nome;
+	public Boolean getActive() {
+		return active;
+	}
+	
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -47,7 +57,7 @@ public class Client extends PanacheEntity{
 }
 	
 	public String toString() {
-		return "\nId :" + this.id + "\nNome :" + this.nome + "\nEmail :" 
+		return "\nId :" + this.id + "\nNome :" + this.name + "\nEmail :" 
 	+ this.email + "\nData Nascimento :" + this.dt_nascimento;
 	}
 }

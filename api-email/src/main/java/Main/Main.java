@@ -3,25 +3,31 @@ package Main;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import br.com.syonet.Mailer.Email;
 import br.com.syonet.client.model.Client;
 import br.com.syonet.newsletter.model.Newsletter;
+import br.com.syonet.newsletter.repository.NewsletterRepository;
 import io.quarkus.scheduler.Scheduled;
 import io.quarkus.scheduler.ScheduledExecution;
 
-@ApplicationScoped
 public class Main {
-	@Scheduled(cron = "0 06 21 * * ? ")
-	void execute(ScheduledExecution execution) {
-
-
+	@Inject
+	NewsletterRepository repository;
+	@Scheduled(cron = "20 24 18 * * ? ")
+	@Transactional
+	public void execute(ScheduledExecution execution) {
+		
 		ArrayList<Newsletter> listNews = (ArrayList<Newsletter>) Newsletter.findNotProcessada();
 		for (Newsletter newsletter : listNews) {
 			System.out.println(newsletter.getDescription());
 			System.out.println(newsletter.getLink());
 			System.out.println(newsletter.getTitle());
+			newsletter.setProcessada(true);
+			repository.getEntityManager().merge(newsletter);
+			
 		}
 		
 		ArrayList<Client> listClient = (ArrayList<Client>) Client.All();
@@ -29,10 +35,9 @@ public class Main {
 		
 		for (Client client : listClient) {
 		
-			System.out.println(client.getNome());
+			System.out.println(client.getName());
 			System.out.println(client.getEmail());
 			System.out.println(client.getDt_nascimento());
-			System.out.println("Finish client");
 		}
 		
 		

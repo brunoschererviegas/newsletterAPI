@@ -10,9 +10,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import br.com.syonet.client.model.Client;
-import br.com.syonet.newsletter.model.Newsletter;
-
 public class SendMail {
 
 	
@@ -78,5 +75,5 @@ public class SendMail {
 	}
 	static String from = "bruno.viegas@syonet.com";
 	static String subject = "E-mail Sended with JavaMail";
-	static String text = "Teste de envio de email da API !";
+	static String text = "";
 }

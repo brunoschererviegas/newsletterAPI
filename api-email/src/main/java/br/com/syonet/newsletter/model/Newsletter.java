@@ -57,11 +57,7 @@ public class Newsletter extends PanacheEntity {
 
 
 	public static List<Newsletter> findNotProcessada() {
-		return list("processada", true);
-	}
-
-	public static long deleteCompleted() {
-		return delete("deleted", true);
+		return list("processada", false);
 	}
 
 	public String toString() {
