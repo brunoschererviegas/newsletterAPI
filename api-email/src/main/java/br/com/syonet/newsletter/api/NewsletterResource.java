@@ -14,8 +14,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
-
 import br.com.syonet.newsletter.model.Newsletter;
 import br.com.syonet.newsletter.repository.NewsletterRepository;
 
@@ -43,10 +41,28 @@ public class NewsletterResource {
 	@POST
 	@Transactional
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response create(@RequestBody(description = "New newslleter for create") @Valid Newsletter newsletter) {
+	public Response create(Newsletter newsletter) {
+		newsletter.setProcessada(false);
+		System.out.println("Create new Newsletter");
+		System.out.println(newsletter.toString());
 		newsletter.persist();
 		return Response.status(Status.CREATED).entity(newsletter).build();
 	}
 
+	@PUT
+	@Path("{id}")
+	@Transactional
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Newsletter update(@Valid Newsletter newsUpdate, @PathParam("id") Long id) {
+		Newsletter news = repository.findById(id);
+		news.setDescription(newsUpdate.getDescription());
+		news.setLink(newsUpdate.getLink());
+		news.setProcessada(newsUpdate.getProcessada());
+		news.setTitle(newsUpdate.getTitle());
+		
+		repository.getEntityManager().merge(news); 
+		return news;
+	}
+	
 }

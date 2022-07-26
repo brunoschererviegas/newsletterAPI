@@ -4,14 +4,18 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotEmpty;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 @Entity
 public class Client extends PanacheEntity{
+
+	@NotEmpty
 	@Column
 	String name;
 
+	@NotEmpty
 	@Column
 	String email;
 
@@ -58,6 +62,6 @@ public class Client extends PanacheEntity{
 	
 	public String toString() {
 		return "\nId :" + this.id + "\nNome :" + this.name + "\nEmail :" 
-	+ this.email + "\nData Nascimento :" + this.dt_nascimento;
+	+ this.email + "\nData Nascimento :" + this.dt_nascimento + "\nActive: " + this.active;
 	}
 }

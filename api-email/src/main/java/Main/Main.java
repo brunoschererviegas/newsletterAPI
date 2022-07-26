@@ -16,7 +16,7 @@ import io.quarkus.scheduler.ScheduledExecution;
 public class Main {
 	@Inject
 	NewsletterRepository repository;
-	@Scheduled(cron = "20 24 18 * * ? ")
+	@Scheduled(cron = "0 0 8 * * ? ")
 	@Transactional
 	public void execute(ScheduledExecution execution) {
 		

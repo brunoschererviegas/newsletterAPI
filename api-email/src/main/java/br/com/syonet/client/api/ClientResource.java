@@ -44,9 +44,8 @@ public class ClientResource {
 	@Transactional
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response create(Client client) {
-		System.out.println(client.getEmail());
-		System.out.println(client.getName());
-		System.out.println(client.getDt_nascimento());
+		System.out.println("Create new Client");
+		System.out.println(client.toString());
 		client.persist();
 		return Response.status(Status.CREATED).entity(client).build();
 	}
