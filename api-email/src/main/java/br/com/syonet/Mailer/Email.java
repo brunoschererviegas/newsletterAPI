@@ -66,7 +66,7 @@ public class Email {
 				
 			}
 			sendMail.setSubject(subject);
-			sendMail.setText(message + newsOfDay);
+			sendMail.setText(message + newsOfDay + messageGoodBye);
 			sendMail.setFrom(client.getEmail());
 			sendMail.main();
 		}

@@ -62,6 +62,6 @@ public class Newsletter extends PanacheEntity {
 
 	public String toString() {
 		return "\nId :" + this.id + "\nTitle :" + this.title + "\nDescription :" + this.description + "\nLink :"
-				+ this.link;
+				+ this.link + "\nProcessada: " + this.processada;
 	}
 }
