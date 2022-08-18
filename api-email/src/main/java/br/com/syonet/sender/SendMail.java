@@ -23,7 +23,7 @@ public class SendMail {
 	public void main() {
 
 		
-		String to = "brunosv1995@gmail.com";
+		String to = "brunoschererviegas@gmail.com";
 		String host = "smtp.gmail.com";
 
 		Properties prop = System.getProperties();
@@ -38,7 +38,7 @@ public class SendMail {
 
 			protected PasswordAuthentication getPasswordAuthentication() {
 
-				return new PasswordAuthentication(to, "pcpuqlmzhtoehaso");
+				return new PasswordAuthentication(to, "tkhvauxtfqlietqb");
 
 			}
 
